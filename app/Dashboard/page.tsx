@@ -34,7 +34,7 @@ const Dashboard = () => {
     null
   );
   const UserMenuOpen = Boolean(UserMenuanchorEl);
-  const openUserMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const openUserMenu = (event: any) => {
     setUserMenuanchorEl(event.currentTarget);
   };
   const closeUserMenu = () => {
