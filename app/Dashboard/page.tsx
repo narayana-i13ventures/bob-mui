@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Avatar,
   Box,
@@ -20,8 +20,8 @@ import {
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import AddIcon from "@mui/icons-material/Add";
-import { ContentCut } from "@mui/icons-material";
 import GroupsIcon from '@mui/icons-material/Groups';
+import DashboardCard from "../components/DasboardCard";
 import ViewInArIcon from '@mui/icons-material/ViewInAr';
 import TimerOutlinedIcon from '@mui/icons-material/TimerOutlined';
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
@@ -29,7 +29,21 @@ import PaymentOutlinedIcon from "@mui/icons-material/PaymentOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
+
+
+
 const Dashboard = () => {
+  useEffect(() => {
+    const handleContextMenu = (event: any) => {
+      event.preventDefault();
+    };
+
+    document.addEventListener('contextmenu', handleContextMenu);
+
+    return () => {
+      document.removeEventListener('contextmenu', handleContextMenu);
+    };
+  }, []);
   const [UserMenuanchorEl, setUserMenuanchorEl] = useState<null | HTMLElement>(
     null
   );
@@ -64,6 +78,7 @@ const Dashboard = () => {
         >
           <Box
             sx={{
+              px: 2,
               width: "250px",
               display: "flex",
               flexDirection: 'column',
@@ -157,13 +172,16 @@ const Dashboard = () => {
                   }}
                 >
                   <MenuItem>
-                    <ListItemIcon>
-                      <ContentCut fontSize="small" />
+                    <ListItemIcon sx={{ pr: 2 }}>
+                      <Avatar src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" alt="Remy Sharp" sx={{ width: 35, height: 35 }}>
+                        N
+                      </Avatar>
                     </ListItemIcon>
                     <ListItemText>Jhon Dave Shared a new canvas.</ListItemText>
                   </MenuItem>
                 </Menu>
                 <Avatar
+                  src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
                   onClick={openUserMenu}
                   sx={{ width: 35, height: 35, cursor: "pointer" }}
                 >
@@ -196,7 +214,7 @@ const Dashboard = () => {
                 >
                   <MenuItem>
                     <ListItemIcon sx={{ minWidth: "40px", mr: 2 }}>
-                      <Avatar alt="Remy Sharp" sx={{ width: 35, height: 35 }}>
+                      <Avatar src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" alt="Remy Sharp" sx={{ width: 35, height: 35 }}>
                         N
                       </Avatar>
                     </ListItemIcon>
@@ -234,7 +252,7 @@ const Dashboard = () => {
               }}
             >
               <Typography variant="h5" component={"h5"}>
-                Dashboard
+                My Projects
               </Typography>
               <Divider sx={{ width: "100%" }} />
               <Box sx={{ flexGrow: 1, pt: 3 }}>
@@ -257,79 +275,7 @@ const Dashboard = () => {
                     </Card>
                   </Grid>
                   <Grid item xs={2}>
-                    <Card
-                      sx={{
-                        maxHeight: "250px",
-                        height: "250px",
-                        textAlign: "center",
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        cursor: "pointer",
-                      }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: "purple",
-                          width: "100%",
-                          height: "100%",
-                          borderRadius: "4px",
-                          opacity: "0.3",
-                        }}
-                      ></div>
-                      <Typography sx={{ p: 2 }}>Uber for Horses</Typography>
-                    </Card>
-                  </Grid>
-                  <Grid item xs={2}>
-                    <Card
-                      sx={{
-                        maxHeight: "250px",
-                        height: "250px",
-                        textAlign: "center",
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        cursor: "pointer",
-                      }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: "purple",
-                          width: "100%",
-                          height: "100%",
-                          borderRadius: "4px",
-                          opacity: "0.3",
-                        }}
-                      ></div>
-                      <Typography sx={{ p: 2 }}>Uber for Horses</Typography>
-                    </Card>
-                  </Grid>
-                  <Grid item xs={2}>
-                    <Card
-                      sx={{
-                        maxHeight: "250px",
-                        height: "250px",
-                        textAlign: "center",
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        cursor: "pointer",
-                      }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: "purple",
-                          width: "100%",
-                          height: "100%",
-                          borderRadius: "4px",
-                          opacity: "0.3",
-                        }}
-                      ></div>
-                      <Typography sx={{ p: 2 }}>Uber for Horses</Typography>
-                    </Card>
+                    <DashboardCard />
                   </Grid>
                 </Grid>
               </Box>
